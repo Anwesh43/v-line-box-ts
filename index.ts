@@ -212,3 +212,26 @@ class VLineToBox {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    vlb : VLineToBox = new VLineToBox()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.vlb.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.vlb.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.vlb.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+
+}
