@@ -50,14 +50,15 @@ class DrawingUtil {
         context.translate(w / 2, h / 2)
         for (var j = 0; j < 2; j++) {
             context.save()
-            context.rotate(deg + deg * sf1)
+            context.rotate((deg + deg * sf2) * (1 - 2 * j))
             DrawingUtil.drawLine(context, 0, 0, 0, -size * sf1)
             context.restore()
         }
         for (var j = 0; j < 2; j++) {
+            const sf2j : number = ScaleUtil.divideScale(sf, j + 2, parts)
             context.save()
             context.translate(-size + size * j, 0)
-            context.fillRect(0, -size * sf1, size, size * sf1)
+            context.fillRect(0, -size * sf2j, size, size * sf2j)
             context.restore()
         }
         context.restore()
